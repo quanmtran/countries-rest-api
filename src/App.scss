@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+$dark-mode-elements: hsl(209, 23%, 22%);
+$dark-mode-background: hsl(207, 26%, 17%);
+$light-mode-text: hsl(200, 15%, 8%);
+$light-mode-input: hsl(0, 0%, 52%);
+$light-mode-background: hsl(0, 0%, 98%);
+$dark-mode-text-and-light-mode-elements: hsl(0, 0%, 100%);
+
+$content-max-width: 1000px;
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+
+@mixin flex-box($direction, $justify, $align, $gap) {
+	display: flex;
+	flex-direction: $direction;
+	justify-content: $justify;
+	align-items: $align;
+	gap: $gap;
+}
+
+body {
+	font-family: 'Nunito Sans', sans-serif;
+}
+
+a {
+	text-decoration: none;
+
+	&:link,
+	&:visited,
+	&:hover,
+	&:active {
+		color: inherit;
+	}
+}
+
+.App {
+	min-height: 100vh;
+	@include flex-box(column, flex-start, center, 0);
+	background-color: $light-mode-background;
+	color: $light-mode-text;
+
+	header {
+		width: 100%;
+		@include flex-box(row, center, center, 0);
+		box-shadow: $box-shadow;
+		background-color: $dark-mode-text-and-light-mode-elements;
+
+		.header-container {
+			width: 100%;
+			@include flex-box(row, space-between, center, 0);
+			max-width: $content-max-width;
+			padding: 2rem 1rem;
+
+			.header-title {
+				font-weight: 800;
+			}
+
+			.dark-mode-btn {
+				@include flex-box(row, center, center, 0.3em);
+				font-weight: 600;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
+	.home {
+		font-size: 14px;
+		width: 100%;
+		max-width: $content-max-width;
+		padding: 2rem 1rem;
+
+		.search-and-filter {
+			margin-bottom: 2rem;
+			@include flex-box(column, stretch, flex-start, 2rem);
+
+			.search {
+				@include flex-box(row, stretch, center, 1rem);
+				width: 100%;
+				max-width: 500px;
+				box-shadow: $box-shadow;
+				border-radius: 10px;
+				padding: 1rem;
+				background-color: $dark-mode-text-and-light-mode-elements;
+
+				input {
+					font-family: inherit;
+					font-weight: 600;
+					width: 100%;
+					height: 2em;
+					outline: none;
+					border: none;
+					background-color: $dark-mode-text-and-light-mode-elements;
+				}
+
+				.clear-input-btn {
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
+
+			select {
+				padding: 1rem;
+				border-radius: 5px;
+				font-weight: 600;
+				box-shadow: $box-shadow;
+				outline: none;
+				border: none;
+				background-color: $dark-mode-text-and-light-mode-elements;
+			}
+		}
+
+		.country-cards {
+			@include flex-box(row, center, center, 3rem);
+			flex-wrap: wrap;
+
+			.country-card {
+				@include flex-box(column, stretch, stretch, 0);
+				border-radius: 10px;
+				overflow: hidden;
+				width: 280px;
+				box-shadow: $box-shadow;
+				background-color: $dark-mode-text-and-light-mode-elements;
+
+				img {
+					object-fit: cover;
+					aspect-ratio: 3/2;
+				}
+
+				.country-card-detail {
+					margin: 2em;
+
+					& > div:first-child {
+						font-weight: 800;
+						font-size: 1.2em;
+						margin-bottom: 1em;
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					}
+
+					span {
+						font-weight: 600;
+					}
+				}
+			}
+		}
+
+		.attribution {
+			font-size: 12px;
+			font-weight: 600;
+			text-align: center;
+			margin-top: 2rem;
+
+			a {
+				color: hsl(228, 100%, 69%);
+			}
+		}
+	}
+
+	.country-detail-container {
+		width: 100%;
+		max-width: $content-max-width;
+		padding: 2rem 1rem;
+		font-size: 16px;
+		@include flex-box(column, center, stretch, 3rem);
+
+		.back-to-home-btn {
+			a {
+				@include flex-box(row, center, center, 0.5em);
+				padding: 0.5em 1.5em;
+				box-shadow: $box-shadow;
+				width: fit-content;
+				background-color: $dark-mode-text-and-light-mode-elements;
+			}
+		}
+
+		.country-detail {
+			@include flex-box(column, center, stretch, 2rem);
+
+			img {
+				width: 100%;
+			}
+
+			& > div {
+				@include flex-box(column, space-between, stretch, 2em);
+
+				& > div:first-child {
+					font-weight: 800;
+					font-size: 1.2em;
+				}
+
+				.country-detail-text {
+					@include flex-box(column, stretch, stretch, 2em);
+					line-height: 2em;
+				}
+
+				& > div:last-child {
+					@include flex-box(row, flex-start, center, 0.5em);
+					flex-wrap: wrap;
+
+					.border-country-btn {
+						padding: 0.2em 2em;
+						background-color: $dark-mode-text-and-light-mode-elements;
+						box-shadow: $box-shadow;
+						border-radius: 2px;
+					}
+				}
+
+				span {
+					font-weight: 600;
+				}
+			}
+		}
+	}
+
+	&.darkmode {
+		background-color: $dark-mode-background;
+		color: $dark-mode-text-and-light-mode-elements;
+
+		header {
+			background-color: $dark-mode-elements;
+		}
+
+		.home {
+			.search-and-filter {
+				.search {
+					background-color: $dark-mode-elements;
+
+					input {
+						background-color: $dark-mode-elements;
+						color: $dark-mode-text-and-light-mode-elements;
+					}
+				}
+
+				select {
+					background-color: $dark-mode-elements;
+					color: $dark-mode-text-and-light-mode-elements;
+				}
+			}
+
+			.country-cards {
+				.country-card {
+					background-color: $dark-mode-elements;
+				}
+			}
+		}
+
+		.country-detail-container {
+			.back-to-home-btn {
+				a {
+					background-color: $dark-mode-elements;
+				}
+			}
+
+			.country-detail {
+				& > div {
+					& > div:last-child {
+						.border-country-btn {
+							background-color: $dark-mode-elements;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 501px) {
+	.App {
+		.home {
+			.search-and-filter {
+				@include flex-box(row, space-between, center, 2rem);
+			}
+		}
+
+		.country-detail-container {
+			.country-detail {
+				@include flex-box(row, space-between, center, 3rem);
+
+				img {
+					width: 50%;
+					height: auto;
+				}
+
+				& > div {
+					.country-detail-text {
+						@include flex-box(row, space-between, stretch, 1em);
+					}
+				}
+			}
+		}
+	}
+}
