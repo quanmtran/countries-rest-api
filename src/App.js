@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 
 // Import components
 import Header from './components/Header.jsx';
@@ -86,7 +86,7 @@ function App() {
 
 	return (
 		<div className={`App ${darkmode ? 'darkmode' : ''}`}>
-			<BrowserRouter>
+			<Router>
 				<Header darkmodeHandler={darkmodeHandler} />
 				<Route
 					path="/"
@@ -104,7 +104,7 @@ function App() {
 					)}
 				/>
 				<Route path="/country-detail/:code" render={(props) => <CountryDetail {...props} countryCodeAndName={countryCodeAndName} />} />
-			</BrowserRouter>
+			</Router>
 		</div>
 	);
 }
